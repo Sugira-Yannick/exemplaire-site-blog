@@ -1,0 +1,2896 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Francais+ - Plateforme d'apprentissage du français nouvelle génération</title>
+    <style>
+        /* ========== DESIGN SYSTEM ========== */
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --primary-light: #60a5fa;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --gray-900: #111827;
+            --gray-800: #1f2937;
+            --gray-700: #374151;
+            --gray-600: #4b5563;
+            --gray-500: #6b7280;
+            --gray-400: #9ca3af;
+            --gray-300: #d1d5db;
+            --gray-200: #e5e7eb;
+            --gray-100: #f3f4f6;
+            --light: #f9fafb;
+            --white: #ffffff;
+            --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            --gradient-secondary: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+            --gradient-success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --border-radius-sm: 0.375rem;
+            --border-radius: 0.75rem;
+            --border-radius-lg: 1rem;
+            --border-radius-xl: 1.5rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--light);
+            color: var(--gray-800);
+            line-height: 1.6;
+        }
+
+        /* ========== NAVIGATION ========== */
+        .navbar {
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--gray-700);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Mega Menu */
+        .mega-menu-wrapper {
+            position: relative;
+        }
+
+        .mega-menu-trigger {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--gray-700);
+            cursor: pointer;
+        }
+
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            width: 1000px;
+            background: white;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-2xl);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 2rem;
+            z-index: 100;
+        }
+
+        .mega-menu-wrapper:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(10px);
+        }
+
+        .mega-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .menu-category {
+            border-right: 1px solid var(--gray-200);
+            padding-right: 1.5rem;
+        }
+
+        .menu-category:last-child {
+            border-right: none;
+        }
+
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem;
+            border-radius: var(--border-radius-sm);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--gray-600);
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .menu-item:hover {
+            background: var(--gray-100);
+            transform: translateX(5px);
+            color: var(--primary);
+        }
+
+        .menu-item-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-primary);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 100px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--gray-300);
+            color: var(--gray-700);
+        }
+
+        .btn-outline:hover {
+            background: var(--gray-100);
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,170.7C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: bottom;
+            opacity: 0.1;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        /* Trusted By Section */
+        .trusted-section {
+            padding: 3rem 2rem;
+            background: white;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .trusted-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .trusted-title {
+            font-size: 1.25rem;
+            color: var(--gray-500);
+            margin-bottom: 2rem;
+        }
+
+        .trusted-grid {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .trusted-item {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--gray-400);
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .trusted-item:hover {
+            opacity: 1;
+        }
+
+        /* Features Grid */
+        .features-section {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .features-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-100);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-2xl);
+            border-color: var(--primary-light);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1rem;
+        }
+
+        /* Programs Section */
+        .programs-section {
+            padding: 4rem 2rem;
+            background: var(--gray-100);
+        }
+
+        .programs-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .program-card:hover {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .program-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .program-icon.blue { background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); }
+        .program-icon.purple { background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%); }
+        .program-icon.pink { background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%); }
+        .program-icon.green { background: linear-gradient(135deg, #10b981 0%, #34d399 100%); }
+        .program-icon.orange { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); }
+        .program-icon.red { background: linear-gradient(135deg, #ef4444 0%, #f87171 100%); }
+
+        .program-icon span {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .program-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .program-description {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .program-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--gray-100);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            color: var(--gray-600);
+        }
+
+        /* Evaluation Module */
+        .evaluation-section {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .evaluation-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .evaluation-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .evaluation-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            background: var(--gray-100);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .stat-box-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .evaluation-form {
+            background: var(--gray-100);
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+        }
+
+        .evaluation-form h4 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        /* Why Section */
+        .why-section {
+            padding: 4rem 2rem;
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .why-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .why-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .why-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .why-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Stats Banner */
+        .stats-banner {
+            padding: 3rem 2rem;
+            background: white;
+            border-top: 1px solid var(--gray-200);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .stats-banner-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .banner-stat {
+            text-align: center;
+        }
+
+        .banner-stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .banner-stat-label {
+            color: var(--gray-600);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--gray-200);
+            padding: 1.5rem 0;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .faq-answer {
+            margin-top: 1rem;
+            color: var(--gray-600);
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* Blog Section */
+        .blog-section {
+            padding: 4rem 2rem;
+            background: var(--gray-100);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .blog-card-image {
+            height: 200px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .blog-card-content {
+            padding: 1.5rem;
+        }
+
+        .blog-card-category {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-card-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-card-excerpt {
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .blog-card-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray-500);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--gray-200);
+            padding-top: 1rem;
+        }
+
+        /* Contact Page */
+        .contact-section {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+        }
+
+        .contact-details {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .contact-details li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* About Page */
+        .about-section {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .about-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-title {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .value-card {
+            padding: 2rem;
+            background: var(--gray-100);
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Dashboard */
+        .dashboard-section {
+            padding: 4rem 2rem;
+            background: var(--gray-100);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 4px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gray-900);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr repeat(4, 1fr);
+            gap: 4rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h4 {
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 4rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: var(--gray-400);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: var(--shadow-2xl);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-400);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Program Detail Page */
+        .program-detail-section {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .program-detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .program-header {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            background: var(--gray-100);
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+        }
+
+        .program-header-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .program-info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .program-info-card {
+            background: var(--gray-100);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .program-info-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .lessons-list {
+            margin-top: 2rem;
+        }
+
+        .lesson-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+            transition: background 0.3s ease;
+        }
+
+        .lesson-item:hover {
+            background: var(--gray-100);
+        }
+
+        .lesson-number {
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .lesson-title {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .lesson-duration {
+            color: var(--gray-500);
+            font-size: 0.875rem;
+        }
+
+        .lesson-lock {
+            color: var(--gray-400);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-stats {
+                justify-content: center;
+            }
+            
+            .evaluation-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .program-header {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .program-info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-banner-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="loadPage('accueil')">
+                📚 Francais+
+            </div>
+            
+            <div class="nav-menu">
+                <button class="nav-link" onclick="loadPage('accueil')">Accueil</button>
+                
+                <!-- Mega Menu Cours -->
+                <div class="mega-menu-wrapper">
+                    <button class="mega-menu-trigger">
+                        <span>Nos Programmes</span>
+                        <span>▼</span>
+                    </button>
+                    
+                    <div class="mega-menu">
+                        <div class="mega-grid">
+                            <div class="menu-category">
+                                <div class="category-title">
+                                    <span>🌍</span> FLE
+                                </div>
+                                <div class="menu-items">
+                                    <button class="menu-item" onclick="loadProgram('fle-a1')">
+                                        <div class="menu-item-icon">A1</div>
+                                        <span>Débutant (A1)</span>
+                                    </button>
+                                    <button class="menu-item" onclick="loadProgram('fle-a2')">
+                                        <div class="menu-item-icon">A2</div>
+                                        <span>Élémentaire (A2)</span>
+                                    </button>
+                                    <button class="menu-item" onclick="loadProgram('fle-b1')">
+                                        <div class="menu-item-icon">B1</div>
+                                        <span>Intermédiaire (B1)</span>
+                                    </button>
+                                    <button class="menu-item" onclick="loadProgram('fle-b2')">
+                                        <div class="menu-item-icon">B2</div>
+                                        <span>Avancé (B2)</span>
+                                    </button>
+                                    <button class="menu-item" onclick="loadProgram('fle-c1')">
+                                        <div class="menu-item-icon">C1</div>
+                                        <span>Expert (C1)</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="menu-category">
+                                <div class="category-title">
+                                    <span>📝</span> Alphabétisation
+                                </div>
+                                <div class="menu-items">
+                                    <button class="menu-item" onclick="loadProgram('alphabetisation')">
+                                        <div class="menu-item-icon">📖</div>
+                                        <span>Alphabétisation</span>
+                                    </button>
+                                    <button class="menu-item" onclick="loadProgram('fli')">
+                                        <div class="menu-item-icon">🗣️</div>
+                                        <span>Français Langue d'Intégration</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="menu-category">
+                                <div class="category-title">
+                                    <span>💼</span> Français Pro
+                                </div>
+                                <div class="menu-items">
+                                    <button class="menu-item" onclick="loadProgram('francais-pro')">
+                                        <div class="menu-item-icon">💼</div>
+                                        <span>Français Professionnel</span>
+                                    </button>
+                                    <button class="menu-item" onclick="loadProgram('btp')">
+                                        <div class="menu-item-icon">🏗️</div>
+                                        <span>FOS - BTP</span>
+                                    </button>
+                                    <button class="menu-item" onclick="loadProgram('restauration')">
+                                        <div class="menu-item-icon">🍳</div>
+                                        <span>FOS - Restauration</span>
+                                    </button>
+                                    <button class="menu-item" onclick="loadProgram('transport')">
+                                        <div class="menu-item-icon">🚚</div>
+                                        <span>FOS - Transport</span>
+                                    </button>
+                                    <button class="menu-item" onclick="loadProgram('services')">
+                                        <div class="menu-item-icon">👥</div>
+                                        <span>FOS - Services</span>
+                                    </button>
+                                    <button class="menu-item" onclick="loadProgram('hygiene')">
+                                        <div class="menu-item-icon">🧹</div>
+                                        <span>FOS - Hygiène</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="menu-category">
+                                <div class="category-title">
+                                    <span>🎓</span> Certifications
+                                </div>
+                                <div class="menu-items">
+                                    <button class="menu-item" onclick="loadProgram('delf')">
+                                        <div class="menu-item-icon">DELF</div>
+                                        <span>DELF</span>
+                                    </button>
+                                    <button class="menu-item" onclick="loadProgram('dalf')">
+                                        <div class="menu-item-icon">DALF</div>
+                                        <span>DALF</span>
+                                    </button>
+                                    <button class="menu-item" onclick="loadProgram('tcf')">
+                                        <div class="menu-item-icon">TCF</div>
+                                        <span>TCF</span>
+                                    </button>
+                                    <button class="menu-item" onclick="loadProgram('dilf')">
+                                        <div class="menu-item-icon">DILF</div>
+                                        <span>DILF</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-category" style="margin-top: 2rem; border-right: none; padding-right: 0;">
+                            <div class="category-title">
+                                <span>📚</span> Parcours Spécialisés
+                            </div>
+                            <div class="menu-items" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;">
+                                <button class="menu-item" onclick="loadProgram('grammaire')">
+                                    <div class="menu-item-icon">📚</div>
+                                    <span>Grammaire</span>
+                                </button>
+                                <button class="menu-item" onclick="loadProgram('ludique')">
+                                    <div class="menu-item-icon">🎲</div>
+                                    <span>Ludique</span>
+                                </button>
+                                <button class="menu-item" onclick="loadProgram('culture')">
+                                    <div class="menu-item-icon">🎨</div>
+                                    <span>Culture</span>
+                                </button>
+                                <button class="menu-item" onclick="loadProgram('illettrisme')">
+                                    <div class="menu-item-icon">❤️</div>
+                                    <span>Illettrisme</span>
+                                </button>
+                                <button class="menu-item" onclick="loadProgram('orthographe')">
+                                    <div class="menu-item-icon">✍️</div>
+                                    <span>Orthographe</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="nav-link" onclick="loadPage('blog')">Blog</button>
+                <button class="nav-link" onclick="loadPage('apropos')">À propos</button>
+                <button class="nav-link" onclick="loadPage('contact')">Contact</button>
+            </div>
+            
+            <div class="auth-buttons">
+                <button class="btn btn-outline" onclick="showModal('login')">Connexion</button>
+                <button class="btn btn-primary" onclick="showModal('register')">Inscription</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Modals -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="hideModal('login')">&times;</button>
+            <h2 class="modal-title">Connexion</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <input type="email" class="form-input" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-input" placeholder="Mot de passe" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Se connecter</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="hideModal('register')">&times;</button>
+            <h2 class="modal-title">Inscription</h2>
+            <form onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <input type="text" class="form-input" placeholder="Nom complet" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-input" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-input" placeholder="Mot de passe" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">S'inscrire</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent">
+        <!-- ACCUEIL PAGE -->
+        <div id="accueil-page">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-container">
+                    <div>
+                        <div class="hero-badge">
+                            🌟 Plus de 300 clients nous font confiance
+                        </div>
+                        <h1 class="hero-title">
+                            Francais+, le seul outil numérique dédié à l'apprentissage du français pour l'insertion socio-professionnelle
+                        </h1>
+                        <p class="hero-description">
+                            Plateforme d'enseignement et d'apprentissage du français.
+                        </p>
+                        
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary" onclick="showModal('register')">Essai gratuit</button>
+                            <button class="btn btn-outline" style="background: white;" onclick="showModal('demo')">Demander une démo</button>
+                        </div>
+                        
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">1600+</span>
+                                <span class="stat-label">heures de formation</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">4.8</span>
+                                <span class="stat-label">note moyenne</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">14M</span>
+                                <span class="stat-label">apprenants</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 10rem;">📚</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trusted By Section -->
+            <section class="trusted-section">
+                <div class="trusted-container">
+                    <div class="trusted-title">Plus de 300 clients nous font confiance</div>
+                    <div class="trusted-grid">
+                        <span class="trusted-item">Éducation Nationale</span>
+                        <span class="trusted-item">Alliance Française</span>
+                        <span class="trusted-item">Institut Français</span>
+                        <span class="trusted-item">France Travail</span>
+                        <span class="trusted-item">CCI France</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features-section">
+                <div class="features-container">
+                    <div class="section-header">
+                        <h2 class="section-title">Pourquoi Francais+ ?</h2>
+                        <p class="section-subtitle">La plateforme complète pour l'enseignement du français</p>
+                    </div>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h3 class="feature-title">Différenciation pédagogique</h3>
+                            <p class="feature-description">
+                                Face à des groupes hétérogènes, Francais+ est la solution. Adaptez les contenus selon les besoins de vos apprenants.
+                            </p>
+                            <button class="feature-link" onclick="loadPage('apropos')">En savoir plus →</button>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🤖</div>
+                            <h3 class="feature-title">Auto-correction</h3>
+                            <p class="feature-description">
+                                Les exercices sont auto-corrigés. Gagnez du temps pour vous concentrer sur votre formation.
+                            </p>
+                            <button class="feature-link" onclick="loadPage('apropos')">En savoir plus →</button>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">📱</div>
+                            <h3 class="feature-title">Application mobile</h3>
+                            <p class="feature-description">
+                                Pour que l'apprentissage soit accessible par tous et partout ! Travaillez en autonomie.
+                            </p>
+                            <button class="feature-link" onclick="loadPage('apropos')">En savoir plus →</button>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">📊</div>
+                            <h3 class="feature-title">Suivi de progression</h3>
+                            <p class="feature-description">
+                                Suivez la progression de chaque apprenant et ajustez votre enseignement.
+                            </p>
+                            <button class="feature-link" onclick="loadPage('apropos')">En savoir plus →</button>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">📝</div>
+                            <h3 class="feature-title">Tests de positionnement</h3>
+                            <p class="feature-description">
+                                17 tests de positionnement pour évaluer le niveau global ou des compétences détaillées.
+                            </p>
+                            <button class="feature-link" onclick="loadPage('cours')">Voir les tests →</button>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🏆</div>
+                            <h3 class="feature-title">Certifications</h3>
+                            <p class="feature-description">
+                                Préparez vos apprenants aux certifications DILF, DELF, DALF et TCF.
+                            </p>
+                            <button class="feature-link" onclick="loadPage('cours')">Voir les certifications →</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Programs Section -->
+            <section class="programs-section">
+                <div class="programs-container">
+                    <div class="section-header">
+                        <h2 class="section-title">Nos Programmes</h2>
+                        <p class="section-subtitle">Plus de 1600 heures d'activités interactives</p>
+                    </div>
+                    
+                    <div class="programs-grid">
+                        <div class="program-card" onclick="loadProgram('alphabetisation')">
+                            <div class="program-icon blue"><span>📖</span></div>
+                            <h3 class="program-title">Alphabétisation</h3>
+                            <p class="program-description">Pour les personnes qui ne savent ni lire, ni écrire, ni parler français.</p>
+                            <span class="program-tag">120h de cours</span>
+                        </div>
+                        
+                        <div class="program-card" onclick="loadProgram('fle')">
+                            <div class="program-icon purple"><span>🌍</span></div>
+                            <h3 class="program-title">Français Langue Étrangère</h3>
+                            <p class="program-description">Du niveau A1 au niveau B2.</p>
+                            <span class="program-tag">400h de cours</span>
+                        </div>
+                        
+                        <div class="program-card" onclick="loadProgram('francais-pro')">
+                            <div class="program-icon pink"><span>💼</span></div>
+                            <h3 class="program-title">Français Professionnel</h3>
+                            <p class="program-description">Pour développer les compétences nécessaires au monde du travail.</p>
+                            <span class="program-tag">200h de cours</span>
+                        </div>
+                        
+                        <div class="program-card" onclick="loadProgram('btp')">
+                            <div class="program-icon orange"><span>🏗️</span></div>
+                            <h3 class="program-title">FOS - BTP</h3>
+                            <p class="program-description">Pour les métiers du bâtiment et des travaux publics.</p>
+                            <span class="program-tag">80h de cours</span>
+                        </div>
+                        
+                        <div class="program-card" onclick="loadProgram('restauration')">
+                            <div class="program-icon green"><span>🍳</span></div>
+                            <h3 class="program-title">FOS - Restauration</h3>
+                            <p class="program-description">Pour les métiers de la restauration.</p>
+                            <span class="program-tag">80h de cours</span>
+                        </div>
+                        
+                        <div class="program-card" onclick="loadProgram('grammaire')">
+                            <div class="program-icon red"><span>📚</span></div>
+                            <h3 class="program-title">Parcours Grammaire</h3>
+                            <p class="program-description">Apprenez ou révisez les points essentiels de la grammaire.</p>
+                            <span class="program-tag">60h de cours</span>
+                        </div>
+                        
+                        <div class="program-card" onclick="loadProgram('ludique')">
+                            <div class="program-icon blue"><span>🎲</span></div>
+                            <h3 class="program-title">Parcours Ludique</h3>
+                            <p class="program-description">Des activités ludo-éducatives pour apprendre en s'amusant.</p>
+                            <span class="program-tag">40h de cours</span>
+                        </div>
+                        
+                        <div class="program-card" onclick="loadProgram('culture')">
+                            <div class="program-icon purple"><span>🎨</span></div>
+                            <h3 class="program-title">Parcours Culture</h3>
+                            <p class="program-description">Découvrez la culture française à travers diverses thématiques.</p>
+                            <span class="program-tag">50h de cours</span>
+                        </div>
+                        
+                        <div class="program-card" onclick="loadProgram('illettrisme')">
+                            <div class="program-icon pink"><span>❤️</span></div>
+                            <h3 class="program-title">Lutte contre l'illettrisme</h3>
+                            <p class="program-description">Pour les personnes en situation d'illettrisme.</p>
+                            <span class="program-tag">150h de cours</span>
+                        </div>
+                        
+                        <div class="program-card" onclick="loadProgram('orthographe')">
+                            <div class="program-icon orange"><span>✍️</span></div>
+                            <h3 class="program-title">Remise à niveau orthographe</h3>
+                            <p class="program-description">Améliorez vos compétences en expression écrite.</p>
+                            <span class="program-tag">80h de cours</span>
+                        </div>
+                        
+                        <div class="program-card" onclick="loadProgram('delf')">
+                            <div class="program-icon green"><span>🎓</span></div>
+                            <h3 class="program-title">Préparation DELF</h3>
+                            <p class="program-description">Examens blancs pour les niveaux A1 à B2.</p>
+                            <span class="program-tag">100h de cours</span>
+                        </div>
+                        
+                        <div class="program-card" onclick="loadProgram('tcf')">
+                            <div class="program-icon red"><span>📋</span></div>
+                            <h3 class="program-title">Préparation TCF</h3>
+                            <p class="program-description">Examens blancs pour le Test de Connaissance du Français.</p>
+                            <span class="program-tag">80h de cours</span>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 3rem;">
+                        <button class="btn btn-primary" onclick="loadPage('cours')">Voir tous les programmes</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Evaluation Module -->
+            <section class="evaluation-section">
+                <div class="evaluation-container">
+                    <div class="evaluation-content">
+                        <h3>Outil d'évaluation et de détection</h3>
+                        <p>Évaluer et positionner un apprenant n'a jamais été aussi simple : positionnement sur son niveau global en FLE, FLM ou sur des compétences détaillées. L'outil vous permet également de faire un test de détection de l'illettrisme.</p>
+                        
+                        <div class="evaluation-stats">
+                            <div class="stat-box">
+                                <div class="stat-box-number">17</div>
+                                <div>tests de positionnement</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-box-number">15min</div>
+                                <div>test express FLE</div>
+                            </div>
+                        </div>
+                        
+                        <div class="evaluation-form">
+                            <h4>Vous souhaitez tester un de nos 17 positionnements ?</h4>
+                            <p>Évaluez votre niveau en français langue étrangère en 15 minutes avec le positionnement FLE express</p>
+                            
+                            <select class="form-select">
+                                <option>J'apprends le français</option>
+                                <option>J'enseigne le français</option>
+                            </select>
+                            
+                            <input type="email" class="form-input" placeholder="Votre adresse mail" style="margin-bottom: 1rem;">
+                            
+                            <button class="btn btn-primary" style="width: 100%;">Je teste mon niveau</button>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 24 24' fill='%233b82f6'%3E%3Cpath d='M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10 4h4v2h-4V4zm10 16H4V8h16v12z'/%3E%3C/svg%3E" alt="Evaluation" style="width: 100%; max-width: 400px;">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why Section -->
+            <section class="why-section">
+                <div class="why-container">
+                    <div class="section-header" style="color: white;">
+                        <h2 class="section-title" style="color: white; -webkit-text-fill-color: white;">Pourquoi Francais+ ?</h2>
+                        <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">La plateforme complète pour l'enseignement du français</p>
+                    </div>
+                    
+                    <div class="why-grid">
+                        <div class="why-card">
+                            <div class="why-icon">📚</div>
+                            <h3>Différenciation pédagogique</h3>
+                            <p>Adaptez les contenus selon les besoins de vos apprenants pour un enseignement sur mesure.</p>
+                        </div>
+                        
+                        <div class="why-card">
+                            <div class="why-icon">📝</div>
+                            <h3>Tâches et corrections</h3>
+                            <p>Créez des tâches, corrigez les expressions écrites et orales directement sur la plateforme.</p>
+                        </div>
+                        
+                        <div class="why-card">
+                            <div class="why-icon">📊</div>
+                            <h3>Test de positionnement</h3>
+                            <p>Évaluez le niveau à l'entrée et à la sortie de formation.</p>
+                        </div>
+                        
+                        <div class="why-card">
+                            <div class="why-icon">📈</div>
+                            <h3>Suivi avancé de progression</h3>
+                            <p>Suivez la progression de chaque apprenant en temps réel.</p>
+                        </div>
+                        
+                        <div class="why-card">
+                            <div class="why-icon">👨‍🏫</div>
+                            <h3>Plateforme formateur et admin</h3>
+                            <p>Interfaces avancées pour une gestion optimale.</p>
+                        </div>
+                        
+                        <div class="why-card">
+                            <div class="why-icon">📱</div>
+                            <h3>Application mobile</h3>
+                            <p>Apprentissage accessible partout, tout le temps.</p>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 3rem;">
+                        <button class="btn btn-outline" style="background: white; color: var(--primary);" onclick="showModal('demo')">Demander une démo</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Banner -->
+            <section class="stats-banner">
+                <div class="stats-banner-container">
+                    <div class="banner-stat">
+                        <div class="banner-stat-number">1600+</div>
+                        <div class="banner-stat-label">heures de formation</div>
+                    </div>
+                    <div class="banner-stat">
+                        <div class="banner-stat-number">100k+</div>
+                        <div class="banner-stat-label">modules d'alphabétisation</div>
+                    </div>
+                    <div class="banner-stat">
+                        <div class="banner-stat-number">57%</div>
+                        <div class="banner-stat-label">en autonomie</div>
+                    </div>
+                    <div class="banner-stat">
+                        <div class="banner-stat-number">5h30</div>
+                        <div class="banner-stat-label">par apprenant/mois</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Blog Section -->
+            <section class="blog-section">
+                <div class="programs-container">
+                    <div class="section-header">
+                        <h2 class="section-title">Derniers articles du blog</h2>
+                        <p class="section-subtitle">Conseils pédagogiques et actualités</p>
+                    </div>
+                    
+                    <div class="blog-grid">
+                        <div class="blog-card" onclick="viewPost(1)">
+                            <div class="blog-card-image">📝</div>
+                            <div class="blog-card-content">
+                                <span class="blog-card-category">Pédagogie</span>
+                                <h3 class="blog-card-title">La différenciation en classe de FLE</h3>
+                                <p class="blog-card-excerpt">Gérer l'hétérogénéité d'une classe demande à l'enseignant de FLE la souplesse nécessaire à une adaptation de chaque minute.</p>
+                                <div class="blog-card-meta">
+                                    <span>Marie Dubois</span>
+                                    <span>5 min de lecture</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="blog-card" onclick="viewPost(2)">
+                            <div class="blog-card-image">📊</div>
+                            <div class="blog-card-content">
+                                <span class="blog-card-category">Numérique</span>
+                                <h3 class="blog-card-title">Mettre le numérique au service de l'autonomie linguistique</h3>
+                                <p class="blog-card-excerpt">L'ambition n'est pas de remplacer le formateur, mais de lui offrir des outils pour renforcer son action.</p>
+                                <div class="blog-card-meta">
+                                    <span>Pierre Martin</span>
+                                    <span>3 min de lecture</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="blog-card" onclick="viewPost(3)">
+                            <div class="blog-card-image">🎓</div>
+                            <div class="blog-card-content">
+                                <span class="blog-card-category">Méthodologie</span>
+                                <h3 class="blog-card-title">Méthode de création de modules de FOS</h3>
+                                <p class="blog-card-excerpt">Retour d'expérience sur notre processus interne de conception de leçons sur objectifs spécifiques.</p>
+                                <div class="blog-card-meta">
+                                    <span>Sophie Bernard</span>
+                                    <span>7 min de lecture</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button class="btn btn-outline" onclick="loadPage('blog')">Voir tous les articles</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <div class="faq-container">
+                    <div class="section-header">
+                        <h2 class="section-title">Questions Fréquentes</h2>
+                    </div>
+                    
+                    <div class="faq-item active">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>À qui s'adresse Francais+ ?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Francais+ accompagne tout type de structure formant au français : organismes de formation, centres de langues, CFA, entreprises, collectivités, enseignants indépendants, Alliances Françaises... Francais+ est utilisé par les formateurs, les apprenants, mais aussi les coordinateurs pédagogiques et directions d'établissements.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>Qu'en pensent les apprenants ?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Les données démontrent la facilité de prise en main de Francais+ par les apprenants. + de 100 000 modules d'alphabétisation faits en 2023, + de 57% des modules sont faits en autonomie, + de 5h30 par apprenant par mois en moyenne, + de 70 000 modules terminés par mois. Sur le Play Store, note de 4,5/5 (> 10 000 téléchargements).
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>Quels contenus trouve-t-on sur Francais+ ?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Nous proposons les spécialités suivantes : Alphabétisation, Français langue d'intégration, Français langue étrangère, Français professionnel, Français sur objectifs spécifiques (BTP, Restauration, Transport, Services), Lutte contre l'illettrisme, Remise à niveau en orthographe, Préparation aux certifications DILF/DELF/TCF, Examens blancs, Tests de positionnement, Parcours ludique, Parcours grammaire.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>Comment sont calculés les tarifs ?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Les tarifs dépendent de la taille de votre structure et évoluent en fonction du nombre d'apprenants. Pour les structures, contactez-nous pour une démo personnalisée. Pour les indépendants, testez gratuitement avec accès à la première leçon de chaque programme.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <span>Quelles sont vos démarches écologiques ?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            Nous mettons en place plusieurs pratiques pour réduire notre impact : serveurs qui s'ajustent à la demande, serveurs internes éteints la nuit et le weekend, communication interne via espaces collaboratifs, compression des images et audios avant mise en ligne, partage de liens plutôt que pièces jointes pour les vidéos.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- BLOG PAGE -->
+        <div id="blog-page" style="display: none;">
+            <section class="blog-section">
+                <div class="programs-container">
+                    <div class="section-header">
+                        <h1 class="section-title">Le blog Francais+</h1>
+                        <p class="section-subtitle">Conseils pédagogiques, actualités et méthodologie</p>
+                    </div>
+                    
+                    <!-- Catégories -->
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 3rem; flex-wrap: wrap;">
+                        <button class="btn btn-primary" onclick="filterBlog('all')">Tous</button>
+                        <button class="btn btn-outline" onclick="filterBlog('pedagogie')">Pédagogie</button>
+                        <button class="btn btn-outline" onclick="filterBlog('numerique')">Numérique</button>
+                        <button class="btn btn-outline" onclick="filterBlog('methodologie')">Méthodologie</button>
+                        <button class="btn btn-outline" onclick="filterBlog('fle')">FLE</button>
+                        <button class="btn btn-outline" onclick="filterBlog('fos')">FOS</button>
+                        <button class="btn btn-outline" onclick="filterBlog('certifications')">Certifications</button>
+                    </div>
+                    
+                    <!-- Articles -->
+                    <div class="blog-grid" id="blog-grid">
+                        <div class="blog-card" onclick="viewPost(1)">
+                            <div class="blog-card-image">📝</div>
+                            <div class="blog-card-content">
+                                <span class="blog-card-category">Pédagogie</span>
+                                <h3 class="blog-card-title">La différenciation en classe de FLE, comment en faire ?</h3>
+                                <p class="blog-card-excerpt">Gérer l'hétérogénéité d'une classe demande à l'enseignant de FLE la souplesse nécessaire à une adaptation de chaque minute. Des besoins particuliers émergent durant le cours et attendent réponse.</p>
+                                <div class="blog-card-meta">
+                                    <span>👩‍🏫 Marie Dubois</span>
+                                    <span>📅 15 janv. 2024</span>
+                                    <span>⏱️ 7 min</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="blog-card" onclick="viewPost(2)">
+                            <div class="blog-card-image">📊</div>
+                            <div class="blog-card-content">
+                                <span class="blog-card-category">Numérique</span>
+                                <h3 class="blog-card-title">Mettre le numérique au service de l'autonomie linguistique</h3>
+                                <p class="blog-card-excerpt">L'ambition n'est pas de remplacer le formateur, mais de lui offrir des outils pour renforcer son action, structurer les apprentissages et maintenir l'engagement des apprenants.</p>
+                                <div class="blog-card-meta">
+                                    <span>👨‍🏫 Pierre Martin</span>
+                                    <span>📅 10 janv. 2024</span>
+                                    <span>⏱️ 5 min</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="blog-card" onclick="viewPost(3)">
+                            <div class="blog-card-image">🎓</div>
+                            <div class="blog-card-content">
+                                <span class="blog-card-category">Méthodologie</span>
+                                <h3 class="blog-card-title">Méthode de création de modules de FOS : la restauration</h3>
+                                <p class="blog-card-excerpt">Retour d'expérience sur notre processus interne de conception de leçons sur objectifs spécifiques, avec détail du processus de création.</p>
+                                <div class="blog-card-meta">
+                                    <span>👩‍🎓 Sophie Bernard</span>
+                                    <span>📅 5 janv. 2024</span>
+                                    <span>⏱️ 10 min</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="blog-card" onclick="viewPost(4)">
+                            <div class="blog-card-image">💼</div>
+                            <div class="blog-card-content">
+                                <span class="blog-card-category">Français Pro</span>
+                                <h3 class="blog-card-title">Le français des affaires : vocabulaire essentiel</h3>
+                                <p class="blog-card-excerpt">Les mots et expressions indispensables pour travailler en français : réunions, emails, présentations, négociations.</p>
+                                <div class="blog-card-meta">
+                                    <span>👨‍💼 Jean Dupont</span>
+                                    <span>📅 1 janv. 2024</span>
+                                    <span>⏱️ 6 min</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="blog-card" onclick="viewPost(5)">
+                            <div class="blog-card-image">🗣️</div>
+                            <div class="blog-card-content">
+                                <span class="blog-card-category">Phonétique</span>
+                                <h3 class="blog-card-title">Comment améliorer sa prononciation ?</h3>
+                                <p class="blog-card-excerpt">Exercices et conseils pour parler français comme un natif : voyelles, consonnes, liaisons et intonation.</p>
+                                <div class="blog-card-meta">
+                                    <span>🗣️ Claire Lefebvre</span>
+                                    <span>📅 28 déc. 2023</span>
+                                    <span>⏱️ 8 min</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="blog-card" onclick="viewPost(6)">
+                            <div class="blog-card-image">📱</div>
+                            <div class="blog-card-content">
+                                <span class="blog-card-category">Outils</span>
+                                <h3 class="blog-card-title">Les meilleures applications pour apprendre le français</h3>
+                                <p class="blog-card-excerpt">Notre sélection d'applications pour compléter votre apprentissage : du vocabulaire, de la grammaire, de l'écoute.</p>
+                                <div class="blog-card-meta">
+                                    <span>📱 Thomas Petit</span>
+                                    <span>📅 20 déc. 2023</span>
+                                    <span>⏱️ 4 min</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="blog-card" onclick="viewPost(7)">
+                            <div class="blog-card-image">📚</div>
+                            <div class="blog-card-content">
+                                <span class="blog-card-category">Grammaire</span>
+                                <h3 class="blog-card-title">Les pronoms relatifs : qui, que, où</h3>
+                                <p class="blog-card-excerpt">Fiche pédagogique complète sur l'utilisation des pronoms relatifs simples avec exercices pratiques.</p>
+                                <div class="blog-card-meta">
+                                    <span>📚 Marie Dubois</span>
+                                    <span>📅 15 déc. 2023</span>
+                                    <span>⏱️ 5 min</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="blog-card" onclick="viewPost(8)">
+                            <div class="blog-card-image">🏗️</div>
+                            <div class="blog-card-content">
+                                <span class="blog-card-category">FOS</span>
+                                <h3 class="blog-card-title">Vocabulaire du BTP pour les apprenants FLE</h3>
+                                <p class="blog-card-excerpt">Les mots essentiels du bâtiment et des travaux publics : outils, matériaux, actions, sécurité.</p>
+                                <div class="blog-card-meta">
+                                    <span>🏗️ Pierre Martin</span>
+                                    <span>📅 10 déc. 2023</span>
+                                    <span>⏱️ 6 min</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="blog-card" onclick="viewPost(9)">
+                            <div class="blog-card-image">🍳</div>
+                            <div class="blog-card-content">
+                                <span class="blog-card-category">FOS</span>
+                                <h3 class="blog-card-title">Lexique de la restauration en français</h3>
+                                <p class="blog-card-excerpt">Le vocabulaire essentiel pour travailler en cuisine ou en salle : plats, ustensiles, commandes, services.</p>
+                                <div class="blog-card-meta">
+                                    <span>🍳 Sophie Bernard</span>
+                                    <span>📅 5 déc. 2023</span>
+                                    <span>⏱️ 7 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 3rem;">
+                        <button class="btn btn-outline" style="padding: 0.5rem 1rem;">Précédent</button>
+                        <button class="btn btn-primary" style="padding: 0.5rem 1rem;">1</button>
+                        <button class="btn btn-outline" style="padding: 0.5rem 1rem;">2</button>
+                        <button class="btn btn-outline" style="padding: 0.5rem 1rem;">3</button>
+                        <button class="btn btn-outline" style="padding: 0.5rem 1rem;">Suivant</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- À PROPOS PAGE -->
+        <div id="apropos-page" style="display: none;">
+            <section class="about-section">
+                <div class="about-container">
+                    <h1 class="about-title">À propos de Francais+</h1>
+                    
+                    <div class="page-content">
+                        <h2>Notre mission</h2>
+                        <p>Francais+ est né de la volonté de rendre l'apprentissage du français accessible à tous, partout et à tout moment. Notre plateforme combine le meilleur des méthodes traditionnelles avec les technologies les plus modernes pour offrir une expérience d'apprentissage unique.</p>
+                        
+                        <p>Nous croyons fermement que la maîtrise du français est une clé essentielle pour l'intégration sociale et professionnelle. C'est pourquoi nous avons développé des programmes spécifiques pour l'alphabétisation, le français langue étrangère, le français professionnel et la lutte contre l'illettrisme.</p>
+                        
+                        <h2>Notre histoire</h2>
+                        <p>Fondée en 2020 par une équipe de professeurs de FLE et d'experts en technologies éducatives, Francais+ a rapidement conquis plus de 300 structures de formation et 14 millions d'apprenants à travers le monde.</p>
+                        
+                        <p>Notre succès repose sur notre capacité à innover constamment pour répondre aux besoins réels du terrain : différenciation pédagogique, auto-correction, suivi personnalisé, application mobile, et programmes sur objectifs spécifiques.</p>
+                        
+                        <h2>Nos valeurs</h2>
+                        <div class="values-grid">
+                            <div class="value-card">
+                                <div class="value-icon">🌍</div>
+                                <h3>Accessibilité</h3>
+                                <p>Rendre le français accessible à tous, quels que soient le niveau, la situation ou le lieu.</p>
+                            </div>
+                            
+                            <div class="value-card">
+                                <div class="value-icon">💡</div>
+                                <h3>Innovation</h3>
+                                <p>Toujours à la pointe de la technologie éducative pour une expérience d'apprentissage optimale.</p>
+                            </div>
+                            
+                            <div class="value-card">
+                                <div class="value-icon">✨</div>
+                                <h3>Qualité</h3>
+                                <p>Des contenus pédagogiques de haute qualité, conçus par des experts du FLE.</p>
+                            </div>
+                            
+                            <div class="value-card">
+                                <div class="value-icon">🤝</div>
+                                <h3>Communauté</h3>
+                                <p>Créer une communauté d'apprenants et d'enseignants qui partagent et progressent ensemble.</p>
+                            </div>
+                        </div>
+                        
+                        <h2>Notre équipe</h2>
+                        <p>Notre équipe est composée de professionnels passionnés :</p>
+                        <ul>
+                            <li><strong>Enseignants de FLE</strong> : avec plus de 10 ans d'expérience en moyenne dans l'enseignement du français en France et à l'étranger.</li>
+                            <li><strong>Ingénieurs pédagogiques</strong> : pour concevoir des parcours d'apprentissage efficaces et engageants.</li>
+                            <li><strong>Développeurs</strong> : pour créer une plateforme technique robuste et une expérience utilisateur fluide.</li>
+                            <li><strong>Designers</strong> : pour rendre l'apprentissage agréable et intuitif.</li>
+                            <li><strong>Experts en insertion professionnelle</strong> : pour développer des programmes adaptés au monde du travail.</li>
+                        </ul>
+                        
+                        <h2>Nos engagements</h2>
+                        
+                        <h3>Engagement pédagogique</h3>
+                        <p>Nous nous engageons à fournir des contenus de qualité, conformes au CECRL, actualisés régulièrement et adaptés aux besoins du terrain. Nos programmes sont conçus par des enseignants expérimentés et testés auprès de vrais apprenants.</p>
+                        
+                        <h3>Engagement écologique</h3>
+                        <p>Tous les membres de Francais+ sont sensibles aux questions écologiques. Nous mettons en place des pratiques pour réduire notre impact :</p>
+                        <ul>
+                            <li>Serveurs qui s'ajustent en fonction de la demande pour limiter la consommation d'énergie</li>
+                            <li>Serveurs internes éteints la nuit et le weekend</li>
+                            <li>Communication interne via espaces collaboratifs plutôt qu'emails</li>
+                            <li>Compression des images et audios avant mise en ligne</li>
+                            <li>Partage de liens plutôt que pièces jointes pour les vidéos</li>
+                        </ul>
+                        
+                        <h3>Engagement social</h3>
+                        <p>Nous proposons des tarifs adaptés aux structures d'insertion et aux associations. Nous développons des programmes spécifiques pour la lutte contre l'illettrisme et l'intégration des personnes nouvellement arrivées en France.</p>
+                        
+                        <h2>Chiffres clés</h2>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 2rem 0; text-align: center;">
+                            <div>
+                                <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary);">300+</div>
+                                <div>clients</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary);">14M</div>
+                                <div>apprenants</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary);">1600+</div>
+                                <div>heures de formation</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary);">100k+</div>
+                                <div>modules d'alphabétisation</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary);">4.8/5</div>
+                                <div>note moyenne</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary);">12</div>
+                                <div>éditeurs et rédacteurs</div>
+                            </div>
+                        </div>
+                        
+                        <h2>Ils nous font confiance</h2>
+                        <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; margin: 2rem 0;">
+                            <span style="font-size: 1.5rem; font-weight: 600; color: var(--gray-400);">Éducation Nationale</span>
+                            <span style="font-size: 1.5rem; font-weight: 600; color: var(--gray-400);">Alliance Française</span>
+                            <span style="font-size: 1.5rem; font-weight: 600; color: var(--gray-400);">Institut Français</span>
+                            <span style="font-size: 1.5rem; font-weight: 600; color: var(--gray-400);">France Travail</span>
+                            <span style="font-size: 1.5rem; font-weight: 600; color: var(--gray-400);">CCI France</span>
+                            <span style="font-size: 1.5rem; font-weight: 600; color: var(--gray-400);">IFPA</span>
+                            <span style="font-size: 1.5rem; font-weight: 600; color: var(--gray-400);">GIP FCIP</span>
+                            <span style="font-size: 1.5rem; font-weight: 600; color: var(--gray-400);">Infrep</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- CONTACT PAGE -->
+        <div id="contact-page" style="display: none;">
+            <section class="contact-section">
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h2 style="font-size: 2rem; margin-bottom: 1rem;">Contactez-nous</h2>
+                        <p>Notre équipe administrative et pédagogique se tient à votre disposition pour répondre à toutes vos questions.</p>
+                        
+                        <ul class="contact-details">
+                            <li>
+                                <div class="contact-icon">📍</div>
+                                <div>
+                                    <strong>Adresse</strong><br>
+                                    70 quai Perrache, 69002 Lyon
+                                </div>
+                            </li>
+                            <li>
+                                <div class="contact-icon">📧</div>
+                                <div>
+                                    <strong>Email</strong><br>
+                                    contact@francaisplus.com
+                                </div>
+                            </li>
+                            <li>
+                                <div class="contact-icon">📞</div>
+                                <div>
+                                    <strong>Téléphone</strong><br>
+                                    +33 (0)4 12 34 56 78
+                                </div>
+                            </li>
+                            <li>
+                                <div class="contact-icon">⏰</div>
+                                <div>
+                                    <strong>Horaires</strong><br>
+                                    Lundi - Vendredi : 9h - 18h
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <div style="margin-top: 2rem;">
+                            <h3>Suivez-nous</h3>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <a href="#" class="social-link" style="background: rgba(255,255,255,0.2);">f</a>
+                                <a href="#" class="social-link" style="background: rgba(255,255,255,0.2);">ig</a>
+                                <a href="#" class="social-link" style="background: rgba(255,255,255,0.2);">in</a>
+                                <a href="#" class="social-link" style="background: rgba(255,255,255,0.2);">yt</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <h2>Envoyez-nous un message</h2>
+                        
+                        <form onsubmit="handleContactSubmit(event)">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" class="form-input" placeholder="Prénom" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-input" placeholder="Nom" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="email" class="form-input" placeholder="Email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <select class="form-select">
+                                    <option>Sujet de votre message</option>
+                                    <option>Question sur les cours</option>
+                                    <option>Devis pour ma structure</option>
+                                    <option>Devenir partenaire</option>
+                                    <option>Problème technique</option>
+                                    <option>Autre</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <textarea class="form-textarea" placeholder="Votre message" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">
+                                Envoyer le message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PROGRAM DETAIL PAGE (template pour tous les programmes) -->
+        <div id="program-detail-page" style="display: none;">
+            <section class="program-detail-section">
+                <div class="program-detail-container">
+                    <button class="btn btn-outline" onclick="loadPage('cours')" style="margin-bottom: 2rem;">← Retour aux programmes</button>
+                    
+                    <div class="program-header" id="programHeader">
+                        <!-- Dynamiquement rempli par JavaScript -->
+                    </div>
+                    
+                    <div class="program-info-grid" id="programInfo">
+                        <!-- Dynamiquement rempli par JavaScript -->
+                    </div>
+                    
+                    <h2>Contenu du programme</h2>
+                    <p id="programDescription"></p>
+                    
+                    <h3 style="margin: 2rem 0 1rem;">Leçons</h3>
+                    <div class="lessons-list" id="lessonsList">
+                        <!-- Dynamiquement rempli par JavaScript -->
+                    </div>
+                    
+                    <div style="margin-top: 2rem; text-align: center;">
+                        <button class="btn btn-primary" onclick="showModal('register')">Commencer gratuitement</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- DASHBOARD (visible après connexion) -->
+        <div id="dashboard-page" style="display: none;">
+            <section class="dashboard-section">
+                <div class="programs-container">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <div>
+                            <h1 style="font-size: 2.5rem;">Bonjour, <span id="userName">Utilisateur</span> !</h1>
+                            <p>Voici un résumé de votre progression</p>
+                        </div>
+                        <button class="btn btn-outline" onclick="logout()">Se déconnecter</button>
+                    </div>
+                    
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <h3>Progression globale</h3>
+                            <div style="font-size: 3rem; font-weight: 700; color: var(--primary);">65%</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 65%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <h3>Cours complétés</h3>
+                            <div style="font-size: 3rem; font-weight: 700; color: var(--primary);">24</div>
+                            <p>sur 36 cours</p>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <h3>Exercices réussis</h3>
+                            <div style="font-size: 3rem; font-weight: 700; color: var(--primary);">156</div>
+                            <p>85% de réussite</p>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <h3>Jours d'affilée</h3>
+                            <div style="font-size: 3rem; font-weight: 700; color: var(--primary);">15</div>
+                            <p>Record : 23 jours</p>
+                        </div>
+                    </div>
+                    
+                    <h2 style="margin: 2rem 0 1rem;">Mes cours en cours</h2>
+                    <div class="programs-grid">
+                        <div class="program-card" onclick="loadProgram('alphabetisation')">
+                            <div class="program-icon blue"><span>📖</span></div>
+                            <h3>Alphabétisation</h3>
+                            <div class="progress-bar" style="margin: 1rem 0;">
+                                <div class="progress-fill" style="width: 75%;"></div>
+                            </div>
+                            <p>12/16 leçons</p>
+                            <button class="btn btn-primary" style="margin-top: 1rem;">Continuer</button>
+                        </div>
+                        
+                        <div class="program-card" onclick="loadProgram('fle-a2')">
+                            <div class="program-icon purple"><span>🌍</span></div>
+                            <h3>FLE - Niveau A2</h3>
+                            <div class="progress-bar" style="margin: 1rem 0;">
+                                <div class="progress-fill" style="width: 45%;"></div>
+                            </div>
+                            <p>8/18 leçons</p>
+                            <button class="btn btn-primary" style="margin-top: 1rem;">Continuer</button>
+                        </div>
+                        
+                        <div class="program-card" onclick="loadProgram('btp')">
+                            <div class="program-icon pink"><span>💼</span></div>
+                            <h3>Français Pro - BTP</h3>
+                            <div class="progress-bar" style="margin: 1rem 0;">
+                                <div class="progress-fill" style="width: 30%;"></div>
+                            </div>
+                            <p>3/10 leçons</p>
+                            <button class="btn btn-primary" style="margin-top: 1rem;">Continuer</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div>
+                <div class="footer-logo">📚 Francais+</div>
+                <p style="color: var(--gray-400); margin-bottom: 2rem;">
+                    La plateforme d'apprentissage du français nouvelle génération
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-link">f</a>
+                    <a href="#" class="social-link">ig</a>
+                    <a href="#" class="social-link">in</a>
+                    <a href="#" class="social-link">yt</a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Programmes</h4>
+                <ul>
+                    <li><button onclick="loadProgram('alphabetisation')">Alphabétisation</button></li>
+                    <li><button onclick="loadProgram('fle')">Français Langue Étrangère</button></li>
+                    <li><button onclick="loadProgram('francais-pro')">Français Professionnel</button></li>
+                    <li><button onclick="loadProgram('btp')">FOS - BTP</button></li>
+                    <li><button onclick="loadProgram('restauration')">FOS - Restauration</button></li>
+                    <li><button onclick="loadProgram('delf')">Certifications</button></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Ressources</h4>
+                <ul>
+                    <li><button onclick="loadPage('blog')">Blog</button></li>
+                    <li><a href="#">Centre d'aide</a></li>
+                    <li><button onclick="loadPage('cours')">Tous les cours</button></li>
+                    <li><a href="#">Fiches pédagogiques</a></li>
+                    <li><a href="#">Exercices gratuits</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>À propos</h4>
+                <ul>
+                    <li><button onclick="loadPage('apropos')">Notre histoire</button></li>
+                    <li><button onclick="loadPage('apropos')">L'équipe</button></li>
+                    <li><button onclick="loadPage('contact')">Contact</button></li>
+                    <li><a href="#">Devenir partenaire</a></li>
+                    <li><a href="#">Carrières</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Légal</h4>
+                <ul>
+                    <li><a href="#">Mentions légales</a></li>
+                    <li><a href="#">Confidentialité</a></li>
+                    <li><a href="#">CGV</a></li>
+                    <li><a href="#">Accessibilité</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2024 Francais+ - Tous droits réservés - Version 2.0.1</p>
+            <p style="margin-top: 0.5rem; font-size: 0.875rem;">
+                Plus de 300 clients nous font confiance • 14 millions d'apprenants • 1600+ heures de formation
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Base de données des programmes
+        const programsData = {
+            'alphabetisation': {
+                title: 'Alphabétisation',
+                icon: '📖',
+                iconClass: 'blue',
+                description: 'Programme complet pour les personnes qui ne savent ni lire, ni écrire, ni parler français. Parcours progressif et adapté.',
+                longDescription: 'Ce programme est spécialement conçu pour les apprenants débutants complets. Il aborde les bases de la lecture, de l\'écriture et de la communication orale en français. Les leçons sont progressives et utilisent des supports visuels et auditifs pour faciliter l\'apprentissage.',
+                duration: '120 heures',
+                lessons: '16 leçons',
+                students: '5000+ apprenants',
+                level: 'A1.1',
+                lessonsList: [
+                    { title: 'Les lettres de l\'alphabet', duration: '45 min', free: true },
+                    { title: 'Les voyelles et les consonnes', duration: '50 min', free: true },
+                    { title: 'Se présenter', duration: '60 min', free: false },
+                    { title: 'Les nombres de 1 à 20', duration: '45 min', free: false },
+                    { title: 'Les jours de la semaine', duration: '40 min', free: false },
+                    { title: 'Les mois de l\'année', duration: '40 min', free: false },
+                    { title: 'Les couleurs', duration: '35 min', free: false },
+                    { title: 'La famille', duration: '55 min', free: false },
+                    { title: 'Les vêtements', duration: '50 min', free: false },
+                    { title: 'La nourriture', duration: '60 min', free: false },
+                    { title: 'Les verbes essentiels (être, avoir)', duration: '65 min', free: false },
+                    { title: 'Se situer dans l\'espace', duration: '50 min', free: false },
+                    { title: 'Demander son chemin', duration: '55 min', free: false },
+                    { title: 'Faire des courses', duration: '60 min', free: false },
+                    { title: 'Parler de ses goûts', duration: '50 min', free: false },
+                    { title: 'Évaluation finale', duration: '90 min', free: false }
+                ]
+            },
+            'fle': {
+                title: 'Français Langue Étrangère',
+                icon: '🌍',
+                iconClass: 'purple',
+                description: 'Programme complet du niveau A1 au niveau B2 pour apprendre ou perfectionner son français.',
+                longDescription: 'Ce programme couvre tous les aspects de l\'apprentissage du français : compréhension écrite et orale, expression écrite et orale, grammaire, vocabulaire et phonétique. Il est structuré par niveaux du CECRL pour une progression adaptée.',
+                duration: '400 heures',
+                lessons: '48 leçons',
+                students: '15000+ apprenants',
+                level: 'A1 à B2',
+                lessonsList: [
+                    { title: 'Introduction au français - Niveau A1', duration: '60 min', free: true },
+                    { title: 'Les bases de la grammaire - A1', duration: '75 min', free: true },
+                    { title: 'Vocabulaire essentiel - A1', duration: '60 min', free: true },
+                    { title: 'Se présenter en français - A1', duration: '50 min', free: false },
+                    { title: 'Parler de sa famille - A1', duration: '55 min', free: false },
+                    { title: 'Les verbes au présent - A1', duration: '70 min', free: false },
+                    { title: 'Les articles définis et indéfinis - A1', duration: '45 min', free: false },
+                    { title: 'La négation - A1', duration: '50 min', free: false },
+                    { title: 'Les adjectifs possessifs - A2', duration: '55 min', free: false },
+                    { title: 'Le passé composé - A2', duration: '80 min', free: false },
+                    { title: 'L\'imparfait - A2', duration: '75 min', free: false },
+                    { title: 'Les pronoms relatifs - B1', duration: '65 min', free: false },
+                    { title: 'Le subjonctif - B1', duration: '90 min', free: false },
+                    { title: 'Le conditionnel - B1', duration: '85 min', free: false },
+                    { title: 'Expression écrite - B2', duration: '70 min', free: false },
+                    { title: 'Compréhension orale - B2', duration: '60 min', free: false }
+                ]
+            },
+            'francais-pro': {
+                title: 'Français Professionnel',
+                icon: '💼',
+                iconClass: 'pink',
+                description: 'Pour développer les compétences nécessaires au monde du travail, niveaux A2 et B1.',
+                longDescription: 'Ce programme prépare les apprenants à utiliser le français dans un contexte professionnel : rédiger des emails, participer à des réunions, passer des appels téléphoniques, comprendre des documents professionnels, etc.',
+                duration: '200 heures',
+                lessons: '24 leçons',
+                students: '8000+ apprenants',
+                level: 'A2 à B1',
+                lessonsList: [
+                    { title: 'Le vocabulaire de l\'entreprise', duration: '60 min', free: true },
+                    { title: 'Rédiger un email professionnel', duration: '75 min', free: true },
+                    { title: 'Passer un appel téléphonique', duration: '70 min', free: true },
+                    { title: 'Participer à une réunion', duration: '80 min', free: false },
+                    { title: 'Faire une présentation', duration: '85 min', free: false },
+                    { title: 'Comprendre une fiche de paie', duration: '60 min', free: false },
+                    { title: 'Rédiger un CV', duration: '90 min', free: false },
+                    { title: 'Préparer un entretien', duration: '95 min', free: false },
+                    { title: 'Le vocabulaire du marketing', duration: '65 min', free: false },
+                    { title: 'La communication interne', duration: '70 min', free: false },
+                    { title: 'Les chiffres et les statistiques', duration: '55 min', free: false },
+                    { title: 'Négocier en français', duration: '80 min', free: false }
+                ]
+            },
+            'btp': {
+                title: 'FOS - BTP',
+                icon: '🏗️',
+                iconClass: 'orange',
+                description: 'Pour les personnes qui se destinent aux métiers du BTP ou qui travaillent déjà dans ce secteur.',
+                longDescription: 'Ce programme est spécialement conçu pour les professionnels du Bâtiment et des Travaux Publics. Il aborde le vocabulaire technique, les consignes de sécurité, la communication sur les chantiers, et les documents spécifiques au secteur.',
+                duration: '80 heures',
+                lessons: '12 leçons',
+                students: '3500+ apprenants',
+                level: 'A2 à B1',
+                lessonsList: [
+                    { title: 'Vocabulaire des outils', duration: '60 min', free: true },
+                    { title: 'Les matériaux de construction', duration: '65 min', free: true },
+                    { title: 'Les consignes de sécurité', duration: '70 min', free: true },
+                    { title: 'Communiquer sur le chantier', duration: '75 min', free: false },
+                    { title: 'Lire un plan', duration: '80 min', free: false },
+                    { title: 'Les métiers du BTP', duration: '55 min', free: false },
+                    { title: 'Les mesures et les quantités', duration: '60 min', free: false },
+                    { title: 'Les documents de chantier', duration: '70 min', free: false },
+                    { title: 'Les signalisations', duration: '50 min', free: false },
+                    { title: 'Les gestes professionnels', duration: '65 min', free: false },
+                    { title: 'La sécurité électrique', duration: '75 min', free: false },
+                    { title: 'Évaluation pratique', duration: '90 min', free: false }
+                ]
+            },
+            'restauration': {
+                title: 'FOS - Restauration',
+                icon: '🍳',
+                iconClass: 'green',
+                description: 'Pour les métiers de la restauration, niveau A2.',
+                longDescription: 'Ce programme est destiné aux professionnels de la restauration. Il couvre le vocabulaire de la cuisine et de la salle, la communication avec les clients, la compréhension des commandes, et les documents spécifiques au secteur.',
+                duration: '80 heures',
+                lessons: '12 leçons',
+                students: '4200+ apprenants',
+                level: 'A2',
+                lessonsList: [
+                    { title: 'Le vocabulaire de la cuisine', duration: '60 min', free: true },
+                    { title: 'Les ustensiles de cuisine', duration: '55 min', free: true },
+                    { title: 'Les produits alimentaires', duration: '65 min', free: true },
+                    { title: 'Prendre une commande', duration: '70 min', free: false },
+                    { title: 'La carte et le menu', duration: '60 min', free: false },
+                    { title: 'Communiquer avec les clients', duration: '75 min', free: false },
+                    { title: 'Les recettes de base', duration: '80 min', free: false },
+                    { title: 'Les régimes alimentaires', duration: '65 min', free: false },
+                    { title: 'La réservation par téléphone', duration: '60 min', free: false },
+                    { title: 'Les normes d\'hygiène', duration: '70 min', free: false },
+                    { title: 'Gérer les stocks', duration: '75 min', free: false },
+                    { title: 'Évaluation pratique', duration: '90 min', free: false }
+                ]
+            },
+            'grammaire': {
+                title: 'Parcours Grammaire',
+                icon: '📚',
+                iconClass: 'red',
+                description: 'Apprenez ou révisez les points essentiels de la grammaire aux niveaux A1, A2 et B1 avec vidéos explicatives.',
+                longDescription: 'Ce parcours est dédié à la grammaire française. Chaque point est expliqué dans une vidéo courte, suivi d\'exercices pratiques pour s\'entraîner. Idéal pour consolider ses bases ou réviser avant un examen.',
+                duration: '60 heures',
+                lessons: '15 leçons',
+                students: '12000+ apprenants',
+                level: 'A1 à B1',
+                lessonsList: [
+                    { title: 'Les articles définis et indéfinis', duration: '45 min', free: true },
+                    { title: 'Les verbes être et avoir', duration: '50 min', free: true },
+                    { title: 'Les verbes du 1er groupe', duration: '55 min', free: true },
+                    { title: 'Les verbes du 2e groupe', duration: '55 min', free: false },
+                    { title: 'Les verbes du 3e groupe', duration: '60 min', free: false },
+                    { title: 'Les adjectifs qualificatifs', duration: '50 min', free: false },
+                    { title: 'Les pronoms personnels', duration: '45 min', free: false },
+                    { title: 'Les pronoms relatifs', duration: '65 min', free: false },
+                    { title: 'Le passé composé', duration: '70 min', free: false },
+                    { title: 'L\'imparfait', duration: '65 min', free: false },
+                    { title: 'Le futur simple', duration: '60 min', free: false },
+                    { title: 'Le conditionnel présent', duration: '70 min', free: false },
+                    { title: 'Le subjonctif présent', duration: '75 min', free: false },
+                    { title: 'La voix passive', duration: '60 min', free: false },
+                    { title: 'Les accords du participe passé', duration: '65 min', free: false }
+                ]
+            },
+            'ludique': {
+                title: 'Parcours Ludique',
+                icon: '🎲',
+                iconClass: 'blue',
+                description: 'Des activités ludo-éducatives pour travailler la langue française tout en s\'amusant, niveau A2.',
+                longDescription: 'Apprendre en s\'amusant ! Ce parcours propose des jeux interactifs, des quiz, des mots croisés, des devinettes pour pratiquer le français de manière ludique et motivante.',
+                duration: '40 heures',
+                lessons: '10 leçons',
+                students: '9500+ apprenants',
+                level: 'A2',
+                lessonsList: [
+                    { title: 'Mots croisés - Vocabulaire', duration: '45 min', free: true },
+                    { title: 'Quiz - Culture générale', duration: '50 min', free: true },
+                    { title: 'Jeu de mémoire - Les verbes', duration: '40 min', free: true },
+                    { title: 'Devinettes - Les métiers', duration: '45 min', free: false },
+                    { title: 'Chasse au trésor - La ville', duration: '60 min', free: false },
+                    { title: 'Mots mêlés - La nourriture', duration: '40 min', free: false },
+                    { title: 'Quiz musical - Chansons', duration: '55 min', free: false },
+                    { title: 'Jeu de rôle - Au restaurant', duration: '70 min', free: false },
+                    { title: 'Puzzle - Expressions', duration: '45 min', free: false },
+                    { title: 'Évaluation ludique', duration: '60 min', free: false }
+                ]
+            },
+            'culture': {
+                title: 'Parcours Culture',
+                icon: '🎨',
+                iconClass: 'purple',
+                description: 'Découvrez la culture française à travers diverses thématiques du niveau A1 au B1.',
+                longDescription: 'Ce parcours vous fait découvrir la richesse de la culture française : gastronomie, art, histoire, traditions, régions, personnages célèbres... Une façon motivante d\'apprendre la langue en contexte.',
+                duration: '50 heures',
+                lessons: '12 leçons',
+                students: '7800+ apprenants',
+                level: 'A1 à B1',
+                lessonsList: [
+                    { title: 'La gastronomie française', duration: '60 min', free: true },
+                    { title: 'Les monuments de Paris', duration: '55 min', free: true },
+                    { title: 'Les fêtes et traditions', duration: '50 min', free: true },
+                    { title: 'L\'histoire de France', duration: '70 min', free: false },
+                    { title: 'Les artistes français', duration: '65 min', free: false },
+                    { title: 'Les régions de France', duration: '60 min', free: false },
+                    { title: 'Le cinéma français', duration: '75 min', free: false },
+                    { title: 'La mode à Paris', duration: '55 min', free: false },
+                    { title: 'Les écrivains célèbres', duration: '65 min', free: false },
+                    { title: 'Les sports en France', duration: '50 min', free: false },
+                    { title: 'Les inventions françaises', duration: '60 min', free: false },
+                    { title: 'Évaluation culturelle', duration: '70 min', free: false }
+                ]
+            },
+            'illettrisme': {
+                title: 'Lutte contre l\'illettrisme',
+                icon: '❤️',
+                iconClass: 'pink',
+                description: 'Pour les personnes en situation d\'illettrisme ou présentant des lacunes en lecture/écriture.',
+                longDescription: 'Ce programme est spécialement conçu pour les personnes en situation d\'illettrisme. Il propose une remise à niveau progressive en lecture et en écriture, avec des exercices adaptés et bienveillants.',
+                duration: '150 heures',
+                lessons: '20 leçons',
+                students: '3000+ apprenants',
+                level: 'A1.1 à A2',
+                lessonsList: [
+                    { title: 'Reconnaître les lettres', duration: '50 min', free: true },
+                    { title: 'Associer sons et lettres', duration: '55 min', free: true },
+                    { title: 'Lire des syllabes', duration: '60 min', free: true },
+                    { title: 'Lire des mots simples', duration: '65 min', free: false },
+                    { title: 'Écrire des mots', duration: '60 min', free: false },
+                    { title: 'Comprendre une phrase', duration: '70 min', free: false },
+                    { title: 'Lire un texte court', duration: '75 min', free: false },
+                    { title: 'Écrire une phrase', duration: '70 min', free: false },
+                    { title: 'Remplir un formulaire', duration: '65 min', free: false },
+                    { title: 'Comprendre une consigne', duration: '55 min', free: false },
+                    { title: 'Lire une histoire', duration: '80 min', free: false },
+                    { title: 'Écrire un petit texte', duration: '85 min', free: false },
+                    { title: 'Lire un article court', duration: '70 min', free: false },
+                    { title: 'Écrire une lettre', duration: '90 min', free: false },
+                    { title: 'Comprendre un message', duration: '60 min', free: false }
+                ]
+            },
+            'orthographe': {
+                title: 'Remise à niveau orthographe',
+                icon: '✍️',
+                iconClass: 'orange',
+                description: 'Améliorez vos compétences en expression écrite et en orthographe.',
+                longDescription: 'Ce programme s\'adresse aux personnes qui souhaitent améliorer leur orthographe. Il aborde les règles essentielles, les accords, les conjugaisons, les homophones, et propose de nombreux exercices d\'application.',
+                duration: '80 heures',
+                lessons: '14 leçons',
+                students: '6500+ apprenants',
+                level: 'B1 à C1',
+                lessonsList: [
+                    { title: 'Les bases de l\'orthographe', duration: '60 min', free: true },
+                    { title: 'Les accords sujet-verbe', duration: '65 min', free: true },
+                    { title: 'Les accords dans le groupe nominal', duration: '70 min', free: true },
+                    { title: 'Les homophones (et/est, à/a)', duration: '60 min', free: false },
+                    { title: 'Les participes passés', duration: '75 min', free: false },
+                    { title: 'Le pluriel des noms', duration: '55 min', free: false },
+                    { title: 'Le pluriel des adjectifs', duration: '60 min', free: false },
+                    { title: 'Les accents et trémas', duration: '50 min', free: false },
+                    { title: 'Les majuscules', duration: '45 min', free: false },
+                    { title: 'Les abréviations', duration: '50 min', free: false },
+                    { title: 'La ponctuation', duration: '55 min', free: false },
+                    { title: 'Les mots composés', duration: '65 min', free: false },
+                    { title: 'Révision générale', duration: '80 min', free: false },
+                    { title: 'Évaluation finale', duration: '90 min', free: false }
+                ]
+            },
+            'delf': {
+                title: 'Préparation DELF',
+                icon: '🎓',
+                iconClass: 'green',
+                description: 'Examens blancs pour les certifications DELF A1, A2, B1 et B2.',
+                longDescription: 'Ce programme prépare aux épreuves du DELF. Il propose des examens blancs complets avec des sujets types, des corrigés détaillés, et des conseils méthodologiques pour réussir chaque épreuve.',
+                duration: '100 heures',
+                lessons: '20 leçons',
+                students: '15000+ apprenants',
+                level: 'A1 à B2',
+                lessonsList: [
+                    { title: 'Présentation du DELF A1', duration: '50 min', free: true },
+                    { title: 'Compréhension orale - A1', duration: '60 min', free: true },
+                    { title: 'Compréhension écrite - A1', duration: '60 min', free: true },
+                    { title: 'Production écrite - A1', duration: '70 min', free: false },
+                    { title: 'Production orale - A1', duration: '65 min', free: false },
+                    { title: 'Examen blanc A1', duration: '120 min', free: false },
+                    { title: 'Présentation du DELF A2', duration: '50 min', free: false },
+                    { title: 'Compréhension orale - A2', duration: '65 min', free: false },
+                    { title: 'Compréhension écrite - A2', duration: '65 min', free: false },
+                    { title: 'Production écrite - A2', duration: '75 min', free: false },
+                    { title: 'Production orale - A2', duration: '70 min', free: false },
+                    { title: 'Examen blanc A2', duration: '120 min', free: false },
+                    { title: 'Présentation du DELF B1', duration: '50 min', free: false },
+                    { title: 'Compréhension orale - B1', duration: '70 min', free: false },
+                    { title: 'Compréhension écrite - B1', duration: '70 min', free: false },
+                    { title: 'Production écrite - B1', duration: '80 min', free: false },
+                    { title: 'Production orale - B1', duration: '75 min', free: false },
+                    { title: 'Examen blanc B1', duration: '150 min', free: false }
+                ]
+            },
+            'tcf': {
+                title: 'Préparation TCF',
+                icon: '📋',
+                iconClass: 'red',
+                description: 'Examens blancs pour le Test de Connaissance du Français.',
+                longDescription: 'Ce programme prépare au TCF. Il propose des exercices types, des tests blancs complets, et des stratégies pour réussir chaque épreuve du test.',
+                duration: '80 heures',
+                lessons: '15 leçons',
+                students: '8000+ apprenants',
+                level: 'A1 à C2',
+                lessonsList: [
+                    { title: 'Présentation du TCF', duration: '50 min', free: true },
+                    { title: 'Compréhension orale - Entraînement', duration: '70 min', free: true },
+                    { title: 'Compréhension écrite - Entraînement', duration: '70 min', free: true },
+                    { title: 'Structures de la langue - Grammaire', duration: '80 min', free: false },
+                    { title: 'Structures de la langue - Vocabulaire', duration: '75 min', free: false },
+                    { title: 'Expression écrite - Méthodologie', duration: '85 min', free: false },
+                    { title: 'Expression orale - Méthodologie', duration: '80 min', free: false },
+                    { title: 'Test blanc - Compréhension orale', duration: '60 min', free: false },
+                    { title: 'Test blanc - Compréhension écrite', duration: '60 min', free: false },
+                    { title: 'Test blanc - Structures', duration: '60 min', free: false },
+                    { title: 'Test blanc complet 1', duration: '150 min', free: false },
+                    { title: 'Test blanc complet 2', duration: '150 min', free: false }
+                ]
+            }
+        };
+
+        // Gestion des pages
+        function loadPage(page) {
+            document.getElementById('accueil-page').style.display = 'none';
+            document.getElementById('blog-page').style.display = 'none';
+            document.getElementById('apropos-page').style.display = 'none';
+            document.getElementById('contact-page').style.display = 'none';
+            document.getElementById('program-detail-page').style.display = 'none';
+            document.getElementById('dashboard-page').style.display = 'none';
+            
+            if (page === 'accueil') {
+                document.getElementById('accueil-page').style.display = 'block';
+            } else if (page === 'blog') {
+                document.getElementById('blog-page').style.display = 'block';
+            } else if (page === 'apropos') {
+                document.getElementById('apropos-page').style.display = 'block';
+            } else if (page === 'contact') {
+                document.getElementById('contact-page').style.display = 'block';
+            } else if (page === 'dashboard') {
+                document.getElementById('dashboard-page').style.display = 'block';
+            }
+            
+            // Mettre à jour la classe active
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.textContent.includes('Accueil') && page === 'accueil') link.classList.add('active');
+                if (link.textContent.includes('Blog') && page === 'blog') link.classList.add('active');
+                if (link.textContent.includes('À propos') && page === 'apropos') link.classList.add('active');
+                if (link.textContent.includes('Contact') && page === 'contact') link.classList.add('active');
+            });
+        }
+
+        // Charger un programme
+        function loadProgram(programId) {
+            const program = programsData[programId];
+            if (!program) return;
+            
+            document.getElementById('accueil-page').style.display = 'none';
+            document.getElementById('blog-page').style.display = 'none';
+            document.getElementById('apropos-page').style.display = 'none';
+            document.getElementById('contact-page').style.display = 'none';
+            document.getElementById('dashboard-page').style.display = 'none';
+            document.getElementById('program-detail-page').style.display = 'block';
+            
+            // Remplir l'en-tête
+            document.getElementById('programHeader').innerHTML = `
+                <div class="program-header-icon ${program.iconClass}">
+                    <span>${program.icon}</span>
+                </div>
+                <div>
+                    <h1>${program.title}</h1>
+                    <p>${program.description}</p>
+                </div>
+            `;
+            
+            // Remplir les infos
+            document.getElementById('programInfo').innerHTML = `
+                <div class="program-info-card">
+                    <div class="program-info-number">${program.duration}</div>
+                    <div>Durée totale</div>
+                </div>
+                <div class="program-info-card">
+                    <div class="program-info-number">${program.lessons}</div>
+                    <div>Leçons</div>
+                </div>
+                <div class="program-info-card">
+                    <div class="program-info-number">${program.students}</div>
+                    <div>Apprenants</div>
+                </div>
+                <div class="program-info-card">
+                    <div class="program-info-number">${program.level}</div>
+                    <div>Niveau</div>
+                </div>
+            `;
+            
+            // Remplir la description
+            document.getElementById('programDescription').innerHTML = program.longDescription;
+            
+            // Remplir la liste des leçons
+            let lessonsHTML = '';
+            program.lessonsList.forEach((lesson, index) => {
+                lessonsHTML += `
+                    <div class="lesson-item">
+                        <div class="lesson-number">${index + 1}</div>
+                        <div class="lesson-title">${lesson.title}</div>
+                        <div class="lesson-duration">${lesson.duration}</div>
+                        <div class="lesson-lock">${lesson.free ? '🔓' : '🔒'}</div>
+                    </div>
+                `;
+            });
+            document.getElementById('lessonsList').innerHTML = lessonsHTML;
+        }
+
+        // Filtre du blog
+        function filterBlog(category) {
+            // Simulation de filtre
+            document.querySelectorAll('.btn-outline').forEach(btn => {
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-outline');
+            });
+            event.target.classList.remove('btn-outline');
+            event.target.classList.add('btn-primary');
+            
+            alert('Filtre actif : ' + category);
+        }
+
+        // Modals
+        function showModal(type) {
+            document.getElementById('loginModal').classList.remove('active');
+            document.getElementById('registerModal').classList.remove('active');
+            document.getElementById(type + 'Modal').classList.add('active');
+        }
+
+        function hideModal(type) {
+            document.getElementById(type + 'Modal').classList.remove('active');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            hideModal('login');
+            loadPage('dashboard');
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            hideModal('register');
+            loadPage('dashboard');
+        }
+
+        function logout() {
+            loadPage('accueil');
+        }
+
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            alert('Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.');
+            event.target.reset();
+        }
+
+        function viewPost(id) {
+            alert('Affichage de l\'article ' + id);
+        }
+
+        function toggleFaq(element) {
+            const item = element.closest('.faq-item');
+            item.classList.toggle('active');
+        }
+
+        // Initialisation
+        loadPage('accueil');
+    </script>
+</body>
+</html>
